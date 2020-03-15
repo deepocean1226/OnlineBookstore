@@ -19,7 +19,24 @@ namespace OnlineBookstore.Pages
         {
             Context = _context;
             _logger = logger;
-            
+
+            //以下代码用来测试数据库
+            /*
+            var db = _context.BookInfo;
+            db.Add(new BookInfo()
+            {
+
+                BookName = "hhhhh打算",
+                CategoryId = 1,
+                Author = "sss",
+                PublishDate = "uhhdkjd",
+                Publisher = "cdc",
+                UnitPrice = 22,
+                ImagePath = null,
+                ContentDescript = "cdcdcd"
+            });
+            _context.SaveChanges();
+            */
 
         }
 
