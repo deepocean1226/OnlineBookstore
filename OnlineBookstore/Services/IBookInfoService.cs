@@ -8,7 +8,7 @@ namespace OnlineBookstore.Services
 {
     public interface IBookInfoService
     {
-        Task<List<BookInfo>> GetAll();
+        Task<IEnumerable<BookInfo>> GetAll();
 
         /*如果返回null表示未找到*/
         Task<BookInfo> GetByBookName(string bookName);

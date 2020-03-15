@@ -14,9 +14,9 @@ namespace OnlineBookstore.Services
         {
             _context = context;
         }
-        public Task<List<BookInfo>> GetAll()
+        public Task<IEnumerable<BookInfo>> GetAll()
         {
-            return Task.Run(function: () => _context.BookInfo.ToList<BookInfo>());
+            return Task.Run(function: () => _context.BookInfo.AsEnumerable<BookInfo>());
         }
 
         public Task<BookInfo> GetByBookName(string bookName)
