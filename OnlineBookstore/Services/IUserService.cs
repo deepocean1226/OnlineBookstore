@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace OnlineBookstore.Services
 {
-    public interface IPurchaseService
+    public interface IUserService
     {
-        Task<List<PurchaseInfo>> GetAll();
+        Task<List<UserInfo>> GetAll();
+
     }
 }
