@@ -35,9 +35,9 @@ namespace OnlineBookstore.Pages
                 ImagePath = null,
                 ContentDescript = "cdcdcd"
             });
-            _context.SaveChanges();
-            */
-
+            _context.SaveChanges();*/
+            
+            
         }
 
         public void OnGet()
