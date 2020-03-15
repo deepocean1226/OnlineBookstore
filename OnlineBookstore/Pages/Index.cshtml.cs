@@ -19,19 +19,7 @@ namespace OnlineBookstore.Pages
         {
             Context = _context;
             _logger = logger;
-            var db = _context.BookInfo;
-            db.Add(new BookInfo()
-            {
-                BookName = "海上钢琴师",
-                CategoryId = 1,
-                Author = "sss",
-                PublishDate = "uhhdkjd",
-                Publisher = "cdc",
-                UnitPrice = 22,
-                ImagePath = null,
-                ContentDescript = "cdcdcd"
-            });
-            Context.SaveChanges();
+            
 
         }
 
