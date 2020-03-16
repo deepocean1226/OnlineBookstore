@@ -2,38 +2,64 @@
 @model OnlineBookstore.LoginModel
 @{
     ViewData["Title"] = "登录";
+    Layout = null;
 }
 
-<h1>@ViewData["Title"]</h1>
-<p>这是我的登录页面</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.userInfos[0].UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.userInfos[0].Pwd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.userInfos[0].UserName)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.userInfos)
-        {
+@*<h1>@ViewData["Title"]</h1>
+    <p>这是我的登录页面</p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pwd)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.userInfos[0].UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.userInfos[0].Pwd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.userInfos[0].UserName)
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.userInfos)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pwd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>login UI</title>
+    <link rel="stylesheet" href="~/css/login.css">
+</head>
+<body>
+    <div class="box">
+        <h2>网上书店系统登录</h2>
+        <form>
+            <div class="inputBox">
+                <input type="text" name="" required="">
+                <label>用户名</label>
+            </div>
+            <div class="inputBox">
+                <input type="password" name="" required="">
+                <label>密码</label>
+            </div>
+            <input type="submit" name="" value="登录">
+        </form>
+    </div>
+</body>
+</html>
