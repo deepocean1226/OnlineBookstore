@@ -38,7 +38,6 @@
             }
         </tbody>
     </table>*@
-
 <!doctype html>
 <html>
 <head>
@@ -46,20 +45,40 @@
     <title>login UI</title>
     <link rel="stylesheet" href="~/css/login.css">
 </head>
+@if (Model.Login_b)
+{
 <body>
-    <div class="box">
-        <h2>网上书店系统登录</h2>
-        <form>
-            <div class="inputBox">
-                <input type="text" name="" required="">
-                <label>用户名</label>
-            </div>
-            <div class="inputBox">
-                <input type="password" name="" required="">
-                <label>密码</label>
-            </div>
-            <input type="submit" name="" value="登录">
-        </form>
+    <div class="inputBox">
+        <p>已经登录了！</p>
     </div>
 </body>
+}
+else
+{
+    <body>
+        <div class="box">
+            <h2>网上书店系统登录</h2>
+            <form method="get">
+                <div class="inputBox">
+                    <input type="text" asp-for="UserInfo.UserName">
+                    <label>用户名</label>
+                </div>
+                <div class="inputBox">
+                    <input type="password" asp-for="UserInfo.Pwd">
+                    <label>密码</label>
+                </div>
+                <button type="submit">登录</button>
+                @if (!Model.Name)
+                {
+                    <p style="color:red">用户不存在！</p>
+                }
+                @if (!Model.Password)
+                {
+                    <p style="color:red">密码错误！</p>
+                }
+            </form>
+        </div>
+    </body>
+}
+
 </html>
