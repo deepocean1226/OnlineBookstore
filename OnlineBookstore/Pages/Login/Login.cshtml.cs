@@ -25,32 +25,27 @@ namespace OnlineBookstore
         public LoginModel(IUserService userService)
         {
             this.userService = userService;
-            Name = true;
-            Password = true;
-            Login_b = false;
+            this.Name = true;
+            this.Password = true;
+            this.Login_b = false;
         }
-
-        public async void OnGet()
-        {
-            userInfos = await userService.GetAll();
-        }
-
         public async Task OnPostAsync()
         {
+            userInfos = await userService.GetAll();
             UserInfo user = userInfos.Find(x => x.UserName == UserInfo.UserName);
             if(user==null)
             {
-                Name = false;
+                this.Name = false;
             }
             else
             {
                 if (user.Pwd == UserInfo.Pwd)
                 {
-                    Login_b = true;
+                    this.Login_b = true;
                 }
                 else
                 {
-                    Password = false;
+                    this.Password = false;
                 }
             }
         }
