@@ -21,12 +21,12 @@ namespace OnlineBookstore.Pages
             _logger = logger;
 
             //以下代码用来测试数据库
-            /*
-            var db = _context.BookInfo;
-            db.Add(new BookInfo()
+            
+            var db = _context.Book;
+            db.Add(new Book()
             {
 
-                BookName = "hhhhh打算",
+                BookName = "测试",
                 CategoryId = 1,
                 Author = "sss",
                 PublishDate = "uhhdkjd",
@@ -35,7 +35,7 @@ namespace OnlineBookstore.Pages
                 ImagePath = null,
                 ContentDescript = "cdcdcd"
             });
-            _context.SaveChanges();*/
+            _context.SaveChanges();
             
             
         }
