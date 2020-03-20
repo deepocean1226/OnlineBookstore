@@ -22,21 +22,21 @@ namespace OnlineBookstore.Pages
 
             //以下代码用来测试数据库
             
-            var db = _context.Book;
-            db.Add(new Book()
-            {
+            //var db = _context.Book;
+            //db.Add(new Book()
+            //{
 
-                BookName = "测试22",
-                CategoryId = 1,
-                Author = "sss",
-                PublishDate = "uhhdkjd",
-                Publisher = "cdc",
-                UnitPrice = 22,
-                ImagePath = null,
-                ContentDescript = "cdcdcd"
-            });
-            _context.SaveChanges();
-            Console.WriteLine("数据已经写入");
+            //    BookName = "测试22",
+            //    CategoryId = 1,
+            //    Author = "sss",
+            //    PublishDate = "uhhdkjd",
+            //    Publisher = "cdc",
+            //    UnitPrice = 22,
+            //    ImagePath = null,
+            //    ContentDescript = "cdcdcd"
+            //});
+            //_context.SaveChanges();
+            //Console.WriteLine("数据已经写入");
             
         }
 
