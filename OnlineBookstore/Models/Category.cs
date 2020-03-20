@@ -7,12 +7,12 @@ namespace OnlineBookstore.Models
     {
         public Category()
         {
-            BookInfo = new HashSet<BookInfo>();
+            Book = new HashSet<Book>();
         }
 
         public int CateId { get; set; }
         public string CateName { get; set; }
 
-        public virtual ICollection<BookInfo> BookInfo { get; set; }
+        public virtual ICollection<Book> Book { get; set; }
     }
 }

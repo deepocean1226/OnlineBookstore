@@ -15,10 +15,11 @@ namespace OnlineBookstore.Models
         {
         }
 
-        public virtual DbSet<BookInfo> BookInfo { get; set; }
+        public virtual DbSet<Book> Book { get; set; }
         public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<PurchaseInfo> PurchaseInfo { get; set; }
-        public virtual DbSet<UserInfo> UserInfo { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<Purchase> Purchase { get; set; }
+        public virtual DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -31,10 +32,8 @@ namespace OnlineBookstore.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BookInfo>(entity =>
+            modelBuilder.Entity<Book>(entity =>
             {
-                entity.HasKey(e => e.BookId);
-
                 entity.Property(e => e.BookId).HasColumnName("BookID");
 
                 entity.Property(e => e.Author)
@@ -60,7 +59,7 @@ namespace OnlineBookstore.Models
                 entity.Property(e => e.UnitPrice).HasColumnType("money");
 
                 entity.HasOne(d => d.Category)
-                    .WithMany(p => p.BookInfo)
+                    .WithMany(p => p.Book)
                     .HasForeignKey(d => d.CategoryId)
                     .HasConstraintName("FK_BookInfo_Category");
             });
@@ -76,33 +75,46 @@ namespace OnlineBookstore.Models
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<PurchaseInfo>(entity =>
+            modelBuilder.Entity<Order>(entity =>
             {
-                entity.HasKey(e => e.DetailNo);
+                entity.HasKey(e => e.OrderNo);
+
+                entity.Property(e => e.OrderPrice).HasColumnType("money");
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Order)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_Order_User");
+            });
+
+            modelBuilder.Entity<Purchase>(entity =>
+            {
+                entity.HasKey(e => e.DetailNo)
+                    .HasName("PK_PurchaseInfo");
 
                 entity.Property(e => e.DetailNo).HasColumnName("detailNO");
 
                 entity.Property(e => e.BookId).HasColumnName("BookID");
 
-                entity.Property(e => e.PurPrice).HasColumnType("numeric(18, 3)");
+                entity.Property(e => e.OrderNo).HasColumnName("OrderNO");
 
-                entity.Property(e => e.UserId).HasColumnName("UserID");
+                entity.Property(e => e.PurPrice).HasColumnType("money");
 
                 entity.HasOne(d => d.Book)
-                    .WithMany(p => p.PurchaseInfo)
+                    .WithMany(p => p.Purchase)
                     .HasForeignKey(d => d.BookId)
-                    .HasConstraintName("FK_PurchaseInfo_BookInfo");
+                    .HasConstraintName("FK_Purchase_Book");
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.PurchaseInfo)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_PurchaseInfo_UserInfo");
+                entity.HasOne(d => d.OrderNoNavigation)
+                    .WithMany(p => p.Purchase)
+                    .HasForeignKey(d => d.OrderNo)
+                    .HasConstraintName("FK_Purchase_Order");
             });
 
-            modelBuilder.Entity<UserInfo>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(e => e.UserId);
-
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.Property(e => e.Pwd)
@@ -110,6 +122,8 @@ namespace OnlineBookstore.Models
                     .HasColumnName("PWD")
                     .HasMaxLength(16)
                     .IsUnicode(false);
+
+                entity.Property(e => e.ShoppingCartNo).HasColumnName("ShoppingCartNO");
 
                 entity.Property(e => e.UserName)
                     .IsRequired()

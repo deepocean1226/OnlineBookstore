@@ -3,17 +3,18 @@ using System.Collections.Generic;
 
 namespace OnlineBookstore.Models
 {
-    public partial class UserInfo
+    public partial class User
     {
-        public UserInfo()
+        public User()
         {
-            PurchaseInfo = new HashSet<PurchaseInfo>();
+            Order = new HashSet<Order>();
         }
 
         public int UserId { get; set; }
         public string Pwd { get; set; }
         public string UserName { get; set; }
+        public int? ShoppingCartNo { get; set; }
 
-        public virtual ICollection<PurchaseInfo> PurchaseInfo { get; set; }
+        public virtual ICollection<Order> Order { get; set; }
     }
 }
