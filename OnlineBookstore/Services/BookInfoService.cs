@@ -14,20 +14,20 @@ namespace OnlineBookstore.Services
         {
             _context = context;
         }
-        public Task<IEnumerable<BookInfo>> GetAll()
+        public Task<IEnumerable<Book>> GetAll()
         {
-            return Task.Run(function: () => _context.BookInfo.AsEnumerable<BookInfo>());
+            return Task.Run(function: () => _context.Book.AsEnumerable<Book>());
         }
 
-        public Task<BookInfo> GetByBookName(string bookName)
+        public Task<Book> GetByBookName(string bookName)
         {
             return Task.Run(function: () =>
-                _context.BookInfo.FirstOrDefault(x => bookName != null && x.BookName == bookName));
+                _context.Book.FirstOrDefault(x => bookName != null && x.BookName == bookName));
         }
 
         public async Task<bool> SaleOut(string bookName, int bookCount)
         {
-            BookInfo? aBook = await GetByBookName(bookName);
+            Book? aBook = await GetByBookName(bookName);
 
             //找不到书籍
             if (aBook == null) return false;

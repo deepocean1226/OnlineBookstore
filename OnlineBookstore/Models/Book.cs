@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace OnlineBookstore.Models
 {
-    public partial class BookInfo
+    public partial class Book
     {
-        public BookInfo()
+        public Book()
         {
-            PurchaseInfo = new HashSet<PurchaseInfo>();
+            Purchase = new HashSet<Purchase>();
         }
 
         public int BookId { get; set; }
@@ -22,6 +22,6 @@ namespace OnlineBookstore.Models
         public string ContentDescript { get; set; }
 
         public virtual Category Category { get; set; }
-        public virtual ICollection<PurchaseInfo> PurchaseInfo { get; set; }
+        public virtual ICollection<Purchase> Purchase { get; set; }
     }
 }
