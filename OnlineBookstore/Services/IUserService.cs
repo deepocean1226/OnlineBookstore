@@ -8,7 +8,7 @@ namespace OnlineBookstore.Services
 {
     public interface IUserService
     {
-        Task<List<UserInfo>> GetAll();
+        Task<List<User>> GetAll();
 
     }
 }

@@ -8,6 +8,6 @@ namespace OnlineBookstore.Services
 {
     public interface IPurchaseService
     {
-        Task<List<PurchaseInfo>> GetAll();
+        Task<List<Purchase>> GetAll();
     }
 }

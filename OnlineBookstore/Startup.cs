@@ -27,8 +27,7 @@ namespace OnlineBookstore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IPurchaseService, PurchaseService>();
+            
 
             //注册数据库上下文
             services.AddDbContext<OnlineBookstoreDBContext>(options =>

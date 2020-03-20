@@ -26,7 +26,7 @@ namespace OnlineBookstore.Pages
             db.Add(new Book()
             {
 
-                BookName = "测试",
+                BookName = "测试22",
                 CategoryId = 1,
                 Author = "sss",
                 PublishDate = "uhhdkjd",
@@ -36,7 +36,7 @@ namespace OnlineBookstore.Pages
                 ContentDescript = "cdcdcd"
             });
             _context.SaveChanges();
-            
+            Console.WriteLine("数据已经写入");
             
         }
 
