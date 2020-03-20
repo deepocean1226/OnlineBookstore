@@ -33,7 +33,8 @@ namespace OnlineBookstore
             services.AddDbContext<OnlineBookstoreDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IBookInfoService, BookInfoService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPurchaseService, PurchaseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -15,7 +15,6 @@
   <ItemGroup>
     <None Include="Pages\Error.cshtml" />
     <None Include="Pages\Index.cshtml" />
-    <None Include="Pages\Logout\Logout.cshtml" />
     <None Include="Pages\Shared\_Layout.cshtml" />
     <None Include="Pages\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="Pages\ShoppingCart\ShoppingCart.cshtml" />
