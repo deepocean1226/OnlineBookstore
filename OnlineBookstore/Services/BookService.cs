@@ -6,11 +6,11 @@ using OnlineBookstore.Models;
 
 namespace OnlineBookstore.Services
 {
-    public class BookInfoService:IBookInfoService
+    public class BookService:IBookService
     {
         private readonly OnlineBookstoreDBContext _context;
 
-        public BookInfoService(OnlineBookstoreDBContext context)
+        public BookService(OnlineBookstoreDBContext context)
         {
             _context = context;
         }
