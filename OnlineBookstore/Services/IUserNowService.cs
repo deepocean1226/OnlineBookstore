@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace OnlineBookstore.Services
 {
-    public interface IUserService
+    public interface IUserNowService
     {
-        Task<List<User>> GetAll();
-        Task Add(User user);
         User Get_Now();
         Task Set_Now(User user);
     }
