@@ -1,8 +1,86 @@
 ﻿@page
-@model OnlineBookstore.ChangePasswdModel
+@model OnlineBookstore.SignOnModel
 @{
     ViewData["Title"] = "注册";
+    Layout = null;
 }
-<h1>@ViewData["Title"]</h1>
-<p>这是我的注册页面</p>
 
+@*<h1>@ViewData["Title"]</h1>
+    <p>这是我的登录页面</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.userInfos[0].UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.userInfos[0].Pwd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.userInfos[0].UserName)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.userInfos)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pwd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>注册- 网上书店</title>
+    <link rel="stylesheet" href="~/css/login.css">
+</head>
+<body>
+    @if (Model.Ok)
+    {
+
+        <div class="box">
+            <h2>注册成功</h2>
+            <form>
+                <div align="center" style="position:relative;top:10px">
+                    <button class="button-index" type="submit" asp-page="/Login/login">返回登录页面</button>
+                </div>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="box">
+            <h2>网上书店系统登录</h2>
+            <form method="post">
+                <div class="inputBox">
+                    <input type="text" asp-for="_User.UserName">
+                    <label>用户名</label>
+                    <span asp-validation-for="_User.UserName"></span>
+                    @if (Model.retype)
+                    {<p class="text-danger">用户名已存在，请重新输入</p>}
+
+                </div>
+                <div class="inputBox">
+                    <input type="password" asp-for="_User.Pwd">
+                    <label>密码</label>
+                    <span asp-validation-for="_User.Pwd"></span>
+                </div>
+                <div>
+                    <button type="submit">注册</button>
+                </div>
+            </form>
+        </div>
+    }
+</body>
+</html>
