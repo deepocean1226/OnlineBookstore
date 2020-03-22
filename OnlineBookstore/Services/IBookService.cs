@@ -6,7 +6,7 @@ using OnlineBookstore.Models;
 
 namespace OnlineBookstore.Services
 {
-    public interface IBookInfoService
+    public interface IBookService
     {
         Task<IEnumerable<Book>> GetAll();
 

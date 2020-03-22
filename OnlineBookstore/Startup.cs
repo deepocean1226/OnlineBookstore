@@ -33,7 +33,7 @@ namespace OnlineBookstore
             services.AddDbContext<OnlineBookstoreDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IBookInfoService, BookInfoService>();
+            services.AddScoped<IBookService, BookService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPurchaseService, PurchaseService>();
             services.AddSingleton<IUserNowService, UserNowService>();
