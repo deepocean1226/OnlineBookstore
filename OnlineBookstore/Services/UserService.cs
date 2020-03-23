@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineBookstore.Services
 {
@@ -23,14 +24,30 @@ namespace OnlineBookstore.Services
             return Task.Run(function: () => _users);
         }
 
-        public Task Add(User user)
+        public Task<bool> ExistUser(string userName)
         {
-            user.UserId = _users.Max(x => x.UserId) + 1;
-            _users.Add(user);
-            var db = _context.User;
-            db.Add(user);
-            _context.SaveChanges();
-            return Task.CompletedTask;
+            return Task.Run(function: () =>
+                {
+                    return GetAll().Result.Exists(x => x.UserName == userName);
+                }
+            );
+        }
+
+        public Task<bool> Add(User user)
+        {
+            return Task.Run(function: () =>
+            {
+                if (ExistUser(user.UserName).Result)
+                {
+                    return false;
+                }
+
+                _users.Add(user);
+                _context.User.Add(user);
+                _context.SaveChanges();
+                return true;
+
+            });
         }
     }
 }
