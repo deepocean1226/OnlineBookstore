@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using OnlineBookstore.Models;
 using OnlineBookstore.Services;
 
+
 namespace OnlineBookstore.Pages
 {
     public class IndexModel : PageModel
@@ -28,7 +29,7 @@ namespace OnlineBookstore.Pages
             this.userService = userService;
             _logger = logger;
             //User user = _userNowService.Get_Now();
-            User user = userService.Get_Now();
+            User user = _userNowService.Get_Now();
 
             if (user != null)
             {
