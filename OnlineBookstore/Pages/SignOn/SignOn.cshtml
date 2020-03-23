@@ -5,45 +5,13 @@
     Layout = null;
 }
 
-@*<h1>@ViewData["Title"]</h1>
-    <p>这是我的登录页面</p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.userInfos[0].UserId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.userInfos[0].Pwd)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.userInfos[0].UserName)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.userInfos)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Pwd)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>*@
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>注册- 网上书店</title>
     <link rel="stylesheet" href="~/css/login.css">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
 </head>
 <body>
     @if (Model.Ok)
@@ -66,18 +34,19 @@
                 <div class="inputBox">
                     <input type="text" asp-for="_User.UserName">
                     <label>用户名</label>
-                    <span asp-validation-for="_User.UserName"></span>
+                    <span asp-validation-for="_User.UserName" class="text-danger"></span>
                     @if (Model.retype)
-                    {<p class="text-danger">用户名已存在，请重新输入</p>}
+                    {<span class="text-danger">用户名已存在，请重新输入</span>}
 
                 </div>
                 <div class="inputBox">
                     <input type="password" asp-for="_User.Pwd">
                     <label>密码</label>
-                    <span asp-validation-for="_User.Pwd"></span>
+                    <span asp-validation-for="_User.Pwd" class="text-danger"></span>
                 </div>
                 <div>
                     <button type="submit">注册</button>
+                    <button class="border-right" type="submit" asp-page="/index">返回主页</button>
                 </div>
             </form>
         </div>
