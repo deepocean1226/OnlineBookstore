@@ -14,49 +14,19 @@ namespace OnlineBookstore.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly OnlineBookstoreDBContext Context;
-        private readonly IUserNowService _userNowService;
         private readonly IUserService userService;
+        private readonly IBookService _bookService;
         private readonly ILogger<IndexModel> _logger;
 
-        [BindProperty]
-        public User User_Now { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger,OnlineBookstoreDBContext _context,IUserNowService userNowService,IUserService userService)
+        public IndexModel(ILogger<IndexModel> logger,IUserService userService,IBookService bookService)
         {
-            Context = _context;
-            this._userNowService = userNowService;
+            
             this.userService = userService;
+            _bookService = bookService;
             _logger = logger;
-            //User user = _userNowService.Get_Now();
-            User user = _userNowService.Get_Now();
-
-            if (user != null)
-            {
-                User_Now = user;
-            }
-            else
-            {
-                User_Now = null;
-            }
-            //以下代码用来测试数据库
             
-            //var db = _context.Book;
-            //db.Add(new Book()
-            //{
 
-            //    BookName = "测试22",
-            //    CategoryId = 1,
-            //    Author = "sss",
-            //    PublishDate = "uhhdkjd",
-            //    Publisher = "cdc",
-            //    UnitPrice = 22,
-            //    ImagePath = null,
-            //    ContentDescript = "cdcdcd"
-            //});
-            //_context.SaveChanges();
-            //Console.WriteLine("数据已经写入");
-            
         }
 
         public void OnGet()
