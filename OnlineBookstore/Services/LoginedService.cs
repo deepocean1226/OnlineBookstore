@@ -21,7 +21,15 @@ namespace OnlineBookstore.Services
             string clientIpAddress = httpContextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
             string clientPort = httpContextAccessor.HttpContext.Connection.RemotePort.ToString();
 
-            LoginInfo.Add(clientIpAddress+clientPort,username);
+            if (LoginInfo.ContainsKey(clientIpAddress + clientPort))
+            {
+                LoginInfo.Remove(clientIpAddress + clientPort);
+                LoginInfo.Add(clientIpAddress + clientPort, username);
+            }
+            else
+            {
+                LoginInfo.Add(clientIpAddress + clientPort, username);
+            }
 
             return Task.CompletedTask;
         }
