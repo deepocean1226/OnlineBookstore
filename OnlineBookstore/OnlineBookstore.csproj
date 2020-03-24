@@ -15,7 +15,6 @@
   <ItemGroup>
     <None Include="Pages\Error.cshtml" />
     <None Include="Pages\Index.cshtml" />
-    <None Include="Pages\Shared\_Layout.cshtml" />
     <None Include="Pages\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="Pages\ShoppingCart\ShoppingCart.cshtml" />
     <None Include="Pages\_ViewImports.cshtml" />
@@ -33,7 +32,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\Login\" />
-    <Folder Include="Pages\SignOn\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
