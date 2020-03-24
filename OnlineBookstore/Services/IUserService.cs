@@ -9,8 +9,7 @@ namespace OnlineBookstore.Services
     public interface IUserService
     {
         Task<List<User>> GetAll();
-        Task Add(User user);
-        User Get_Now();
-        Task Set_Now(User user);
+        Task<bool> Add(User user);
+
     }
 }

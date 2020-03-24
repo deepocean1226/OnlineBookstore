@@ -58,7 +58,7 @@ namespace OnlineBookstore
                 {
                     this.Login_b = true;
                     //await userNowService.Set_Now(user);
-                    await userService.Set_Now(user);//当前用户
+                    await userNowService.Set_Now(user);//当前用户
                 }
                 else
                 {
