@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +29,7 @@ namespace OnlineBookstore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //注册数据库上下文
             services.AddDbContext<OnlineBookstoreDBContext>(options =>
@@ -36,6 +38,7 @@ namespace OnlineBookstore
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPurchaseService, PurchaseService>();
+            services.AddSingleton<ILoginedService, LoginedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +59,8 @@ namespace OnlineBookstore
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

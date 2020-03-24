@@ -16,14 +16,16 @@ namespace OnlineBookstore.Pages
     {
         private readonly IUserService userService;
         private readonly IBookService _bookService;
+        public ILoginedService _loginedService;
         private readonly ILogger<IndexModel> _logger;
 
 
-        public IndexModel(ILogger<IndexModel> logger,IUserService userService,IBookService bookService)
+        public IndexModel(ILogger<IndexModel> logger,IUserService userService,IBookService bookService,ILoginedService loginedService)
         {
             
             this.userService = userService;
             _bookService = bookService;
+            _loginedService = loginedService;
             _logger = logger;
             
 

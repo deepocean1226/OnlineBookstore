@@ -7,4 +7,12 @@
     <div class="text-center">
         <h1 class="display-4">主页</h1>
         <p>这是我的主页</p>
+        @if (Model._loginedService.isLogined().Result)
+        {
+            <p>已登录：@Model._loginedService.GetUserName().Result</p>
+        }
+        else
+        {
+            <p>未登录: @Model._loginedService.GetUserName().Result</p>
+        }
     </div>

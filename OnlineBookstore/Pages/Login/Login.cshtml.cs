@@ -12,6 +12,7 @@ namespace OnlineBookstore
     public class LoginModel : PageModel
     {
         private readonly IUserService userService;
+        private readonly ILoginedService _loginedService;
         public List<User> users = new List<User>();
 
         
@@ -25,9 +26,10 @@ namespace OnlineBookstore
         [BindProperty]
         public bool Login_b { get; set; }
 
-        public LoginModel(IUserService userService)
+        public LoginModel(IUserService userService,ILoginedService loginedService)
         {
             this.userService = userService;
+            _loginedService = loginedService;
             this.Name = true;
             this.Password = true;
             this.Login_b = false;
@@ -46,6 +48,7 @@ namespace OnlineBookstore
             {
                 if (user.Pwd == User.Pwd)
                 {
+                    _loginedService.AddLogin(user.UserName);
                     this.Login_b = true;
                 }
                 else
