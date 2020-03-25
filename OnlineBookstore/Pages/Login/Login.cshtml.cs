@@ -48,7 +48,7 @@ namespace OnlineBookstore
             {
                 if (user.Pwd == User.Pwd)
                 {
-                    _loginedService.AddLogin(user.UserName);
+                    await _loginedService.AddLogin(user.UserName);
                     this.Login_b = true;
                 }
                 else

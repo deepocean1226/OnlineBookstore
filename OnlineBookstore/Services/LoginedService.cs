@@ -18,17 +18,19 @@ namespace OnlineBookstore.Services
         }
         public Task AddLogin(string username)
         {
+
             string clientIpAddress = httpContextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
             string clientPort = httpContextAccessor.HttpContext.Connection.RemotePort.ToString();
+            Console.WriteLine(clientIpAddress+clientPort);
 
-            if (LoginInfo.ContainsKey(clientIpAddress + clientPort))
+            if (LoginInfo.ContainsKey(clientIpAddress+clientPort))
             {
-                LoginInfo.Remove(clientIpAddress + clientPort);
-                LoginInfo.Add(clientIpAddress + clientPort, username);
+                LoginInfo.Remove(clientIpAddress+clientPort);
+                LoginInfo.Add(clientIpAddress+clientPort, username);
             }
             else
             {
-                LoginInfo.Add(clientIpAddress + clientPort, username);
+                LoginInfo.Add(clientIpAddress+clientPort, username);
             }
 
             return Task.CompletedTask;
@@ -39,7 +41,7 @@ namespace OnlineBookstore.Services
             string clientIpAddress = httpContextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
             string clientPort = httpContextAccessor.HttpContext.Connection.RemotePort.ToString();
 
-            LoginInfo.Remove(clientIpAddress + clientPort);
+            LoginInfo.Remove(clientIpAddress+clientPort);
 
             return Task.CompletedTask;
         }
@@ -50,7 +52,7 @@ namespace OnlineBookstore.Services
                 string clientIpAddress = httpContextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
                 string clientPort = httpContextAccessor.HttpContext.Connection.RemotePort.ToString();
 
-                if (LoginInfo.ContainsKey(clientIpAddress + clientPort))
+                if (LoginInfo.ContainsKey(clientIpAddress+clientPort))
                 {
                     return true;
                 }
@@ -66,9 +68,9 @@ namespace OnlineBookstore.Services
                 string clientIpAddress = httpContextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
                 string clientPort = httpContextAccessor.HttpContext.Connection.RemotePort.ToString();
 
-                if (LoginInfo.ContainsKey(clientIpAddress + clientPort))
+                if (LoginInfo.ContainsKey(clientIpAddress+clientPort))
                 {
-                    return LoginInfo[clientIpAddress + clientPort];
+                    return LoginInfo[clientIpAddress+clientPort];
                 }
 
                 return null;
