@@ -1,14 +1,127 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "主页";
+    ViewData["Title"] = "Home page";
 }
-
-    <div class="text-center">
-        <h1 class="display-4">主页</h1>
-        <p>这是我的主页</p>
-        @if (Model.User_Now!=null)
-        {
-            <p>此时用户为-@Model.User_Now.UserName</p>
-        }
+<link rel="stylesheet" href="~/css/mainPage.css" />
+<div class="sub-navbar">
+    <div id="catalogTitle">
+        <h3>Catalog</h3>
     </div>
+    <div class="search-box">
+        <h3>Search</h3>
+        <form method="post" class="search-box-mid">
+            <input type="search" class="search-box-box" />
+            <input type="image" class="search-box-button" src="~/images/glass.png" />
+        </form>
+    </div>
+</div>
+
+<div class="main-container">
+    <div class="main-top">
+        <div class="menu-left">
+            <ul class="menu-left-items">
+                @foreach (var category in @Model.ViewModel.Categories)
+                {
+                    <li>
+                        <h1>
+                            <a class="menu-left-link-flex-container" href="/Category/@Html.DisplayFor(model => category)">
+                                <span class="menu-left-link-flex-text">@Html.DisplayTextFor(model => category)</span>
+                                <i class="glyphicon glyphicon-chevron-right glyph-menu-left"></i>
+                            </a>
+                        </h1>
+                    </li>
+                }
+
+            </ul>
+        </div>
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
+                    <div class="carousel-caption" role="option">
+                        <p>
+                            This is online bookstore proof of concept created in ASP.NET Core.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
+                    <div class="carousel-caption" role="option">
+                        <p>
+                            This is online bookstore proof of concept created in ASP.NET Core.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="~/images/banner3.svg" alt="Microsoft Azure" class="img-responsive" />
+                    <div class="carousel-caption" role="option">
+                        <p>
+                            This is online bookstore proof of concept created in ASP.NET Core.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div class="main-recommended-container">
+        <div class="main-recommended">
+            <div class="main-recommended-box-left">
+                <h3 class="box-title">Recommended</h3>
+                <div class="main-recommended-box-left-row">
+                    @foreach (var book in @Model.ViewModel.RecommendedBooks)
+                    {
+                        <div class="recommended-book">
+                            <a asp-page="./Books/Details" asp-route-id="@Html.DisplayTextFor(model => book.BookId)"><img class="book-cover-recommended" src="~/images/BookCovers/@Html.DisplayFor(model => book.ImagePath)" /></a>
+                            <a asp-page="./Books/Details" asp-route-id="@Html.DisplayTextFor(model => book.BookId)"><p class="main-recommended-title">@Html.DisplayTextFor(model => book.BookName)</p></a>
+                            <p class="recommended-book-price">特价: @Html.DisplayTextFor(model => book.UnitPrice)￥</p>
+                        </div>
+                    }
+                </div>
+            </div>
+            @*<div class="main-recommended-box-left">
+                    <h3 class="box-title">Recommended</h3>
+                    <div class="main-recommended-box-left-row">
+                        @foreach (var book in @Model.ViewModel.RecommendedBooks)
+                        {
+                            <div class="recommended-book">
+                                <a asp-page="./Books/Details" asp-route-id="@Html.DisplayTextFor(model => book.Id)"><img class="book-cover-recommended" src="~/images/BookCovers/@Html.DisplayFor(model => book.ImgPath)" /></a>
+                                <a asp-page="./Books/Details" asp-route-id="@Html.DisplayTextFor(model => book.Id)"><p class="main-recommended-title">@Html.DisplayTextFor(model => book.Name)</p></a>
+                                <p class="recommended-book-price">Cena: @Html.DisplayTextFor(model => book.Price)zł</p>
+                            </div>
+                        }
+                    </div>
+                </div>*@
+        </div>
+        <div class="main-recommended-timed">
+            <div class="recommended-book-timed-item"><h4>Limited sale!</h4></div>
+            @foreach (var book in @Model.ViewModel.LimitedSaleBooks)
+            {
+                <div class="recommended-book-timed-item">
+                    <a asp-page="./Books/Details" asp-route-id="@Html.DisplayTextFor(model => book.BookId)" class="recommended-book-timed-item-link-wrapper">
+                        <img class="book-cover-recommended-timed" src="~/images/BookCovers/@Html.DisplayFor(model => book.ImagePath)" />
+                    </a>
+
+                    <a asp-page="./Books/Details" asp-route-id="@Html.DisplayTextFor(model => book.BookId)">
+                        <p class="main-recommended-title">@Html.DisplayTextFor(model => book.BookName)</p>
+                    </a>
+                    <p class="recommended-book-price">Cena: @Html.DisplayTextFor(model => book.UnitPrice)zł</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

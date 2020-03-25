@@ -1,0 +1,63 @@
+﻿@page "{id}"
+@model OnlineBookstore.Pages.Book.DetailsModel
+
+<link rel="stylesheet" href="~/css/detailsBookPage.css" />
+<div class="book-content">
+    <div class="book-main-info">
+        <div class="book-main-info-left">
+            <img src="~/images/BookCovers/@Html.DisplayFor(model => model.ViewModel.Book.ImagePath)" class="bookcover" />
+            <div class="book-main-info-details">
+                <h2>@Html.DisplayFor(model => model.ViewModel.Book.BookName)</h2>
+                <div>
+                    作者:@Html.DisplayFor(model => model.ViewModel.Book.Author)
+                    @*  根据作者名搜索书籍
+                            @foreach (var author in Model.ViewModel.Book.BookAuthors)
+                        {
+                            <a asp-page="./Books/Details" asp-route-id="@author.AuthorId">@author.Author.FirstName @author.Author.LastName</a>
+                        }*@
+                </div>
+                <div>出版社: @Html.DisplayFor(model => model.ViewModel.Book.Publisher)</div>
+                <div>出版日期: @Html.DisplayFor(model => model.ViewModel.Book.PublishDate)</div>
+                <div>图书类型:@Model.Category</div>
+                <div>剩余数量:<h4>@Html.DisplayFor(model => model.ViewModel.Book.Quantity)</h4></div>
+
+            </div>
+        </div>
+        <div class="book-description">
+            <dl class="dl-horizontal">
+                <dt>
+                    描述:
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ViewModel.Book.ContentDescript)
+                </dd>
+            </dl>
+        </div>
+        <div class="book-details-similar">
+            <h3 class="box-title">Recommended</h3>
+            <div class="main-recommended-box-left-row">
+                @foreach (var book in @Model.ViewModel.Similar)
+                {
+                    <div class="recommended-book">
+                        <a asp-page="./Books/Details" asp-route-id="@Html.DisplayTextFor(model => book.BookId)"><img class="book-cover-recommended" src="~/images/BookCovers/@Html.DisplayFor(model => book.ImagePath)" /></a>
+                        <a asp-page="./Books/Details" asp-route-id="@Html.DisplayTextFor(model => book.BookId)"><p class="main-recommended-title">@Html.DisplayTextFor(model => book.BookName)</p></a>
+                        <p class="recommended-book-price">价格: @Html.DisplayTextFor(model => book.UnitPrice)￥</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div class="book-main-info-right">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="book-details-price">Cena: @Html.DisplayFor(model => model.ViewModel.Book.UnitPrice)</div>
+            <br />
+            <input asp-for="ViewModel.OrderQuantity" type="number" class="form-control" value="1" />
+            <br />
+            @*<div class="book-details-add-to-basket"><img src="~/images/shopping-basket.png" /></div>*@
+            <button type="submit" class="btn btn-default">添加到购物车</button>
+        </form>
+    </div>
+
+</div>

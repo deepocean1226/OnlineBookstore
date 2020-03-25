@@ -22,8 +22,11 @@ namespace OnlineBookstore.Pages
         [BindProperty]
         public User User_Now { get; set; }
 
+        public IndexPageViewModel ViewModel { get; set; }
+
         public IndexModel(ILogger<IndexModel> logger,OnlineBookstoreDBContext _context,IUserNowService userNowService,IUserService userService)
         {
+            ViewModel = new IndexPageViewModel();
             Context = _context;
             this._userNowService = userNowService;
             this.userService = userService;
@@ -59,9 +62,13 @@ namespace OnlineBookstore.Pages
             
         }
 
-        public void OnGet()
+        public IActionResult OnGetAsync()
         {
+            ViewModel.RecommendedBooks = Context.Book.ToList();
+            ViewModel.LimitedSaleBooks = Context.Book.ToList();
+            ViewModel.Categories = Context.Category.Select(x => x.CateName).ToList();
 
+            return Page();
         }
     }
 }
