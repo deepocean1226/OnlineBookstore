@@ -18,19 +18,22 @@ namespace OnlineBookstore.Pages
         private readonly IBookService _bookService;
         public ILoginedService _loginedService;
         private readonly ILogger<IndexModel> _logger;
+        private readonly OnlineBookstoreDBContext Context;
 
+        public IndexPageViewModel ViewModel { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger,OnlineBookstoreDBContext _context,IUserNowService userNowService,IUserService userService)
+        public IndexModel(ILogger<IndexModel> logger,OnlineBookstoreDBContext _context,IUserService userService,ILoginedService loginedService,IBookService bookService)
         {
             ViewModel = new IndexPageViewModel();
             Context = _context;
-            this._userNowService = userNowService;
             this.userService = userService;
             _bookService = bookService;
             _loginedService = loginedService;
             _logger = logger;
-            
 
+            ViewModel.RecommendedBooks = Context.Book.ToList();
+            ViewModel.LimitedSaleBooks = Context.Book.ToList();
+            ViewModel.Categories = Context.Category.Select(x => x.CateName).ToList();
         }
 
         public IActionResult OnGetAsync()
