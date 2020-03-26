@@ -1,4 +1,5 @@
-﻿.book-details-add-to-basket {
+﻿@charset "utf-8";
+.book-details-add-to-basket {
     display: flex;
     flex-direction: column;
     align-items: center;

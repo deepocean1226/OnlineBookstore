@@ -1,4 +1,5 @@
-﻿.book-cover-recommended-timed {
+﻿@charset "utf-8";
+.book-cover-recommended-timed {
     width: 55%;
 }
 .recommended-book > a, .recommended-book > a:hover {
