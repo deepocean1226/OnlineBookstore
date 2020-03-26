@@ -16,7 +16,7 @@ namespace OnlineBookstore.Services
         }
         public Task<IEnumerable<Book>> GetAll()
         {
-            return Task.Run(function: () => _context.Book.AsEnumerable<Book>());
+            return Task.Run(function: () => _context.Book.AsEnumerable());
         }
 
         public Task<Book> GetByBookName(string bookName)

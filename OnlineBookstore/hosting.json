@@ -1,0 +1,16 @@
+{
+  "server.urls": "http://*:5000",
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": "*" //高云飞本地
+    //"DefaultConnection": "Server=localhost\\MSSQLSERVER01;Database=OnlineBookstoreDB;Trusted_Connection=True;"  //杨世杰本地
+  }
+}
+

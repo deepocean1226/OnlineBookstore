@@ -12,18 +12,13 @@ namespace OnlineBookstore
     public class LoginModel : PageModel
     {
         private readonly IUserService userService;
-        private readonly IUserNowService userNowService;
+        private readonly ILoginedService _loginedService;
         public List<User> users = new List<User>();
 
-        /// <summary>
-        /// 保存获取的用户信息
-        /// </summary>
+        
         [BindProperty]
         public User User { get; set; }
 
-        /// <summary>
-        /// 各标志位
-        /// </summary>
         [BindProperty]
         public bool Name { get; set; }
         [BindProperty]
@@ -31,19 +26,16 @@ namespace OnlineBookstore
         [BindProperty]
         public bool Login_b { get; set; }
 
-        public LoginModel(IUserService userService,IUserNowService userNowService)
+        public LoginModel(IUserService userService,ILoginedService loginedService)
         {
             this.userService = userService;
-            this.userNowService = userNowService;
+            _loginedService = loginedService;
             this.Name = true;
             this.Password = true;
             this.Login_b = false;
         }
 
-        /// <summary>
-        /// 页面的登录响应
-        /// </summary>
-        /// <returns></returns>
+        
         public async Task OnPostAsync()
         {
             users = await userService.GetAll();
@@ -56,9 +48,8 @@ namespace OnlineBookstore
             {
                 if (user.Pwd == User.Pwd)
                 {
+                    await _loginedService.AddLogin(user.UserName);
                     this.Login_b = true;
-                    //await userNowService.Set_Now(user);
-                    await userNowService.Set_Now(user);//当前用户
                 }
                 else
                 {
