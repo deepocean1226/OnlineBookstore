@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,10 +11,10 @@ using OnlineBookstore.Services;
 
 namespace OnlineBookstore.Pages.ShoppingCart
 {
-    public class ShoppingCartModel : PageModel
+    public class ShoppingCartModel_Finished : PageModel
     {
-        //æœåŠ¡
-        private readonly ILogger<ShoppingCartModel> _logger;
+        //·şÎñ
+        private readonly ILogger<ShoppingCartModel_Finished> _logger;
         private readonly IPurchaseService _purchaseService;
         private readonly IOrderService _orderService;
         public IBookService _bookService;
@@ -22,14 +22,14 @@ namespace OnlineBookstore.Pages.ShoppingCart
         private readonly OnlineBookstoreDBContext _context;
         private readonly IUserService _userService;
 
-        //å±€éƒ¨å˜é‡
+        //¾Ö²¿±äÁ¿
         public Order _order = new Order();
         public List<Purchase> _purchaseList = new List<Purchase>();
         public decimal sum = 0;
 
-        public ShoppingCartModel(ILogger<ShoppingCartModel> logger,IPurchaseService purchaseService,
-            IOrderService orderService,IBookService bookService,ILoginedService loginedService,
-            OnlineBookstoreDBContext context,IUserService userService)
+        public ShoppingCartModel_Finished(ILogger<ShoppingCartModel_Finished> logger, IPurchaseService purchaseService,
+            IOrderService orderService, IBookService bookService, ILoginedService loginedService,
+            OnlineBookstoreDBContext context, IUserService userService)
         {
             _logger = logger;
             _purchaseService = purchaseService;
@@ -68,11 +68,11 @@ namespace OnlineBookstore.Pages.ShoppingCart
             {
                 _context.Purchase.Remove(_context.Purchase.Find(purchase));
                 _context.SaveChanges();
-                Console.WriteLine("å·²å®Œæˆï¼Œä¸ä¿®æ”¹Bookæ•°é‡" + book.Quantity);
+                Console.WriteLine("ÒÑÍê³É£¬²»ĞŞ¸ÄÊı¾İ¿â"+book.Quantity);
             }
-            else if (_context.Purchase.Find(purchase).PurStatus == 0)
+            else if(_context.Purchase.Find(purchase).PurStatus == 0)
             {
-                Console.WriteLine("ä¿®æ”¹å‰" + book.Quantity);
+                Console.WriteLine("ĞŞ¸ÄÇ°" + book.Quantity);
 
                 book.Quantity += _context.Purchase.Find(purchase).PurQuan;
 
@@ -80,10 +80,12 @@ namespace OnlineBookstore.Pages.ShoppingCart
                 _context.Purchase.Remove(_context.Purchase.Find(purchase));
 
                 _context.SaveChanges();
-                Console.WriteLine("ä¿®æ”¹å" + book.Quantity);
+                Console.WriteLine("ĞŞ¸Äºó" + book.Quantity);
             }
+           
             return RedirectToPage();
         }
 
     }
 }
+

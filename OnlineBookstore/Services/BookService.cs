@@ -19,6 +19,12 @@ namespace OnlineBookstore.Services
             return Task.Run(function: () => _context.Book.AsEnumerable());
         }
 
+        public Task<Book> GetById(int bookId)
+        {
+            return Task.Run(function: () =>
+                _context.Book.FirstOrDefault(x => x.BookId == bookId));
+        }
+
         public Task<Book> GetByBookName(string bookName)
         {
             return Task.Run(function: () =>

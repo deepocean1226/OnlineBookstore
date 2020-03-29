@@ -16,9 +16,11 @@ namespace OnlineBookstore.Services
             _purchases = context.Purchase.ToList();
         }
 
-        public Task<List<Purchase>> GetAll()
+        public Task<List<Purchase>> GetAll() => Task.Run(function: () => _purchases);
+
+        public Task<List<Purchase>> GetById(int orderId)
         {
-            return Task.Run(function: () => _purchases);
+            return Task.Run(function: () => { return _purchases.FindAll(x => x.OrderNo == orderId); });
         }
     }
 }

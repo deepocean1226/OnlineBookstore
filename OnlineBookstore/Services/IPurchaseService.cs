@@ -9,5 +9,6 @@ namespace OnlineBookstore.Services
     public interface IPurchaseService
     {
         Task<List<Purchase>> GetAll();
+        Task<List<Purchase>> GetById(int orderId);
     }
 }

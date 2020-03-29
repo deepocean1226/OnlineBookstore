@@ -11,5 +11,7 @@ namespace OnlineBookstore.Services
         Task<bool> isLogined();
         Task<string> GetUserName();
 
+        Task Exit();
+
     }
 }

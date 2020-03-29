@@ -1,0 +1,87 @@
+﻿@page
+@model ShoppingCartModel_Finished
+@{
+    ViewData["Title"] = "购物车";
+}
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - 网上书店</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+    <div class="container" id="app">
+
+        <!-- bootstrap的面板组件包含带标题的面板、带表格的面板灯 -->
+        <div class="card">
+            <div class="card-header">
+                <h3>购物车</h3>
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link " asp-page="ShoppingCart">全部订单</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-page="ShoppingCart_unPay">待付款</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link  active">已完成</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <!-- 带表格的面板 table-hover:鼠标悬停高亮的表格-->
+                <table class="table table-hover" style="font-size: 20px">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col">图片</th>
+                            <th scope="col">书名</th>
+                            <th scope="col">单价</th>
+                            <th scope="col">购买数量</th>
+                            <th scope="col">小计</th>
+                            <th scope="col">交易状态</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var a in Model._purchaseList)
+                        {
+                            if (a.PurStatus == 1)
+                            {
+                                <tr class="align-middle text-center border-dark">
+                                    <td><img style="width: 80px" src="~/images/BookCovers/@Model._bookService.GetById(a.BookId).Result.ImagePath" /></td>
+                                    <td class="align-middle text-center">《@Model._bookService.GetById(a.BookId).Result.BookName》</td>
+                                    <td class="align-middle text-center">@a.Book.UnitPrice</td>
+                                    <td class="align-middle text-center">@a.PurQuan</td>
+                                    <td class="align-middle text-center">@(a.PurQuan * a.PurPrice)</td>
+                                    @switch (a.PurStatus)
+                                    {
+                                        case 0:
+                                            <td class="align-middle text-center">待付款</td>
+                                            break;
+                                        case 1:
+                                            <td class="align-middle text-center">已完成</td>
+                                            break;
+                                    }
+
+                                    @{
+                                        Model.sum += a.PurQuan * a.PurPrice;
+                                    }
+                                    <td class="align-middle text-center">
+                                        <div class="btn-group btn-group-sm">
+                                            <form method="post">
+                                                <button class="btn btn-outline-danger" type="submit" asp-page-handler="del" asp-route-purchase='@a.DetailNo'>删除</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

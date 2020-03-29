@@ -77,5 +77,16 @@ namespace OnlineBookstore.Services
 
             });
         }
+
+        public Task Exit()
+        {
+            string clientIpAddress = httpContextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+            string clientPort = httpContextAccessor.HttpContext.Connection.RemotePort.ToString();
+
+            LoginInfo.Remove(clientIpAddress + clientPort);
+
+            return Task.CompletedTask;
+        }
+
     }
 }

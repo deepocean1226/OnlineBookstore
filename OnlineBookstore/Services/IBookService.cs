@@ -13,6 +13,8 @@ namespace OnlineBookstore.Services
         /*如果返回null表示未找到*/
         Task<Book> GetByBookName(string bookName);
 
+        Task<Book> GetById(int bookId);
+
         /*将卖出书籍将库存数量减bookCount*/
         /*如果数量不足或者书籍不存在则返回false表示无法出售*/
         Task<bool> SaleOut(string bookName,int bookCount);  
