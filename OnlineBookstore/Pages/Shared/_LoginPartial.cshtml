@@ -1,0 +1,26 @@
+@using OnlineBookstore.Models
+@using OnlineBookstore.Services
+@using Microsoft.AspNetCore.Identity
+
+@inject ILoginedService loginedService
+
+@if (loginedService.isLogined().Result)
+{
+    <form  method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a  title="Manage">Hello @loginedService.GetUserName().Result</a>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-page="/SignOn/SignOn">SignOn</a></li>
+        <li><a asp-page="/Login/Login">SignIn</a></li>
+    </ul>
+}

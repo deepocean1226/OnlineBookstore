@@ -28,20 +28,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-page="/Index" class="navbar-brand">网上书店</a>
+                <a asp-page="/Index" class="navbar-brand" style="color:red">网上书店</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-page="/Index">主页</a></li>
                     <li><a asp-page="/About">关于</a></li>
                     <li><a asp-page="/Contact/Contact">联系我们</a></li>
+                    <li><a asp-page="/ShoppingCart/ShoppingCart">购物车</a></li>
                     @*<li><a asp-page="/Books/Details/3">Book</a></li>*@
                 </ul>
-                @*<partial name="_LoginPartial" />*@
-                <ul class="nav navbar-nav navbar-right">
+                <partial name="_LoginPartial" />
+                @*<ul class="nav navbar-nav navbar-right">
                     <li><a asp-page="/SignOn/SignOn">注册</a></li>
                     <li><a asp-page="/Login/Login">登录</a></li>
-                </ul>
+                </ul>*@
             </div>
         </div>
     </nav>

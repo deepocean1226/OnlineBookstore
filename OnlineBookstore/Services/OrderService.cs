@@ -22,5 +22,16 @@ namespace OnlineBookstore.Services
         {
             return Task.Run(function: () => { return _order.FindAll(x => x.UserId == userId); });
         }
+
+        public Task<bool> Add(Order order)
+        {
+            return Task.Run(function: () =>
+            {
+                _order.Add(order);
+                _context.Order.Add(order);
+                _context.SaveChanges();
+                return true;
+            });
+        }
     }
 }

@@ -49,5 +49,14 @@ namespace OnlineBookstore.Services
 
             });
         }
+
+        public Task<int> GetId(string Username)
+        {
+            return Task.Run(function: () =>
+            {
+                var user = _users.Find(x => x.UserName == Username);
+                return user.UserId;
+            });
+        }
     }
 }

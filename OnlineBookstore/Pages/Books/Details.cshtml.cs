@@ -7,26 +7,42 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using OnlineBookstore.Models;
+using OnlineBookstore.Services;
 
 namespace OnlineBookstore.Pages.Book
 {
     public class DetailsModel : PageModel
     {
         private readonly OnlineBookstoreDBContext _context;
+        private readonly ILoginedService _loginedService;
+        private readonly IOrderService _orderService;
+        private readonly IUserService _userService;
+        private readonly IPurchaseService _purchaseService;
+        public Order order;
+        public Purchase purchase;
+
         /// <summary>
         /// 当前用户信息
         /// </summary>
         //private readonly UserManager<ExtendedIdentityUser> _userManager;
         //, UserManager<ExtendedIdentityUser> userManager
 
-        public DetailsModel(OnlineBookstoreDBContext context)
+        public DetailsModel(OnlineBookstoreDBContext context,
+            ILoginedService loginedService,
+            IOrderService orderService,
+            IUserService userService,
+            IPurchaseService purchaseService)
         {
             //_userManager = userManager;
             _context = context;
+            this._loginedService = loginedService;
+            this._orderService = orderService;
+            this._userService = userService;
+            this._purchaseService = purchaseService;
             ViewModel = new DetailsPageViewModel();
-            ReturnUrl = "/Account/Cart";
         }
 
+        [BindProperty]
         public DetailsPageViewModel ViewModel { get; set; }
 
         public string ReturnUrl { get; set; }
@@ -43,10 +59,9 @@ namespace OnlineBookstore.Pages.Book
                 return NotFound();
             }
 
-
-            ViewModel.Book = await _context
-                .Book
-                .FirstOrDefaultAsync(m => m.BookId == id);
+            ViewModel.Book =await _context
+               .Book
+               .FirstOrDefaultAsync(m => m.BookId == id);
 
             ViewModel.Similar = await _context
                 .Book
@@ -71,28 +86,51 @@ namespace OnlineBookstore.Pages.Book
         /// 添加购物车
         /// </summary>
         /// <returns></returns>
-        //public async Task<IActionResult> OnPostAsync()
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = await _userManager.GetUserAsync(User);
+        public async Task<IActionResult> OnPostAsync(int id)
+        {
+            if (!_loginedService.isLogined().Result)
+            {
+                return RedirectToPage("/SignOn/SignOn");
+            }
+            else {
+                ViewModel.Book = await _context
+              .Book
+              .FirstOrDefaultAsync(m => m.BookId == id);
 
-        //        if (user == null)
-        //            return LocalRedirect("/Identity/Account/Register");
-
-        //        await _context.Cart.AddAsync(new Cart()
-        //        {
-        //            User = user,
-        //            CartBooks = new List<CartBook>() { new CartBook() { Book = ViewModel.Book, Quantity = ViewModel.OrderQuantity } }
-        //        });
-        //        await _context.SaveChangesAsync();
-
-        //        //Show cart
-        //        return LocalRedirect(ReturnUrl);
-        //    }
-
-        //    //Something went wrong
-        //    return Page();
-        //}
+                ViewModel.Similar = await _context
+                    .Book
+                    .Take(2).ToListAsync();
+                if (ModelState.IsValid)
+                {
+                    if (ViewModel.Book.Quantity < ViewModel.OrderQuantity)
+                    {
+                        return Content("<script >alert('剩余库存不足，请调整购物量');</script >", "text/html");
+                    }
+                    order = _orderService.GetById(_userService.GetAll().Result.Find(x => x.UserName == _loginedService.GetUserName().Result).UserId).Result.FirstOrDefault();
+                    if (order == null)
+                    {
+                        order = new Order() { UserId = await _userService.GetId(_loginedService.GetUserName().Result) };
+                        await _orderService.Add(order);   
+                    }
+                    if (_purchaseService.FindByBookid(order.OrderNo, id).Result)
+                    {
+                        await _purchaseService.AddBook(order.OrderNo,id,ViewModel.OrderQuantity);
+                        return RedirectToPage("/ShoppingCart/ShoppingCart");
+                    }
+                    purchase = new Purchase()
+                    {
+                        BookId = id,
+                        OrderNo = order.OrderNo,
+                        PurQuan = ViewModel.OrderQuantity,
+                        PurPrice = ViewModel.Book.UnitPrice,
+                        PurStatus = 0
+                    };
+                    await _purchaseService.Add(order.OrderNo,purchase);
+                    return RedirectToPage("/ShoppingCart/ShoppingCart");
+                }
+            }
+            //Something went wrong
+            return Page();
+        }
     }
 }

@@ -10,6 +10,6 @@ namespace OnlineBookstore.Services
     {
         Task<List<Order>> GetAll();
         Task<List<Order>> GetById(int userId);
-
+        Task<bool> Add(Order order);
     }
 }

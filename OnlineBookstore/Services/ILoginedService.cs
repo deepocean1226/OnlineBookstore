@@ -10,7 +10,6 @@ namespace OnlineBookstore.Services
         Task AddLogin(string username);
         Task<bool> isLogined();
         Task<string> GetUserName();
-
         Task Exit();
 
     }

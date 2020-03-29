@@ -8,7 +8,6 @@ namespace OnlineBookstore.Models
 {
     public class DetailsPageViewModel
     {
-        [Required]
         public Book Book { get; set; }
         public ICollection<Book> Similar  { get; set; }
 

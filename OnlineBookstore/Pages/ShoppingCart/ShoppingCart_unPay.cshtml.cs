@@ -54,13 +54,13 @@ namespace OnlineBookstore.Pages.ShoppingCart
                 }
             }
 
-            //ÎÞµÇÂ¼²âÊÔ
-            _order = _orderService.GetById(0).Result.FirstOrDefault();
+            ////ÎÞµÇÂ¼²âÊÔ
+            //_order = _orderService.GetById(0).Result.FirstOrDefault();
 
-            if (_order != null)
-            {
-                _purchaseList = _purchaseService.GetById(_order.OrderNo).Result;
-            }
+            //if (_order != null)
+            //{
+            //    _purchaseList = _purchaseService.GetById(_order.OrderNo).Result;
+            //}
 
         }
 

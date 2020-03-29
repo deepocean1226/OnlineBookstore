@@ -51,12 +51,16 @@ namespace OnlineBookstore.Pages.ShoppingCart
                     _purchaseList = _purchaseService.GetById(_order.OrderNo).Result;
                 }
             }
-            _order = _orderService.GetById(0).Result.FirstOrDefault();
-
-            if (_order != null)
+            else
             {
-                _purchaseList = _purchaseService.GetById(_order.OrderNo).Result;
+                RedirectToPage("/SignOn/SignOn");
             }
+            //_order = _orderService.GetById(0).Result.FirstOrDefault();
+
+            //if (_order != null)
+            //{
+            //    _purchaseList = _purchaseService.GetById(_order.OrderNo).Result;
+            //}
 
         }
 

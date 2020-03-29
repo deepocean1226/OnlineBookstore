@@ -32,17 +32,17 @@
             <h2>网上书店系统登录</h2>
             <form method="post">
                 <div class="inputBox">
-                    <input type="text" asp-for="_User.UserName">
+                    <input type="text" asp-for="Input.UserName">
                     <label>用户名</label>
-                    <span asp-validation-for="_User.UserName" class="text-danger"></span>
+                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
                     @if (Model.retype)
                     {<span class="text-danger">用户名已存在，请重新输入</span>}
 
                 </div>
                 <div class="inputBox">
-                    <input type="password" asp-for="_User.Pwd">
+                    <input type="password" asp-for="Input.Password">
                     <label>密码</label>
-                    <span asp-validation-for="_User.Pwd" class="text-danger"></span>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div>
                     <button type="submit">注册</button>
