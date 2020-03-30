@@ -1,5 +1,5 @@
-﻿@page "{id}"
-@model OnlineBookstore.Pages.Book.DetailsModel
+﻿@page "{id:int}"
+@model OnlineBookstore.DetailsModel
 
 <link rel="stylesheet" href="~/css/detailsBookPage.css" />
 <div class="book-content">
@@ -39,8 +39,8 @@
                 @foreach (var book in @Model.ViewModel.Similar)
                 {
                     <div class="recommended-book">
-                        <a asp-page="./Books/Details" asp-route-id="@Html.DisplayTextFor(model => book.BookId)"><img class="book-cover-recommended" src="~/images/BookCovers/@Html.DisplayFor(model => book.ImagePath)" /></a>
-                        <a asp-page="./Books/Details" asp-route-id="@Html.DisplayTextFor(model => book.BookId)"><p class="main-recommended-title">@Html.DisplayTextFor(model => book.BookName)</p></a>
+                        <a asp-page="Details" asp-route-id="@Html.DisplayTextFor(model => book.BookId)"><img class="book-cover-recommended" src="~/images/BookCovers/@Html.DisplayFor(model => book.ImagePath)" /></a>
+                        <a asp-page="Details" asp-route-id="@Html.DisplayTextFor(model => book.BookId)"><p class="main-recommended-title">@Html.DisplayTextFor(model => book.BookName)</p></a>
                         <p class="recommended-book-price">价格: @Html.DisplayTextFor(model => book.UnitPrice)￥</p>
                     </div>
                 }

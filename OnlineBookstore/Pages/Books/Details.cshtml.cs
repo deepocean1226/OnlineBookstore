@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using OnlineBookstore.Models;
 using OnlineBookstore.Services;
 
-namespace OnlineBookstore.Pages.Book
+namespace OnlineBookstore
 {
     public class DetailsModel : PageModel
     {
