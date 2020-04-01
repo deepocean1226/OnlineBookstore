@@ -42,11 +42,11 @@ namespace OnlineBookstore.Pages
             ViewModel.Id = id;
             switch (id)
             {
-                case "教育": CategoryId = 1; break;
-                case "小说": CategoryId = 2; break;
-                case "生活": CategoryId = 3; break;
-                case "科技": CategoryId = 4; break;
-                case "童书": CategoryId = 5; break;
+                case "鏁欒偛": CategoryId = 1; break;
+                case "灏忚": CategoryId = 2; break;
+                case "鐢熸椿": CategoryId = 3; break;
+                case "绉戞妧": CategoryId = 4; break;
+                case "绔ヤ功": CategoryId = 5; break;
             }
             ViewModel.RecommendedBooks = Context.Book.ToList();
             var books = from x in ViewModel.RecommendedBooks
