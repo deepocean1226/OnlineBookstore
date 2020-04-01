@@ -56,6 +56,10 @@ namespace OnlineBookstore.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if (bookname == null)
+            {
+                return Page();
+            }
             Models.Book book = _bookService.GetByBookName(bookname).Result;
             return RedirectToPage("/Books/Details", new { id=book.BookId });
             //, routeValues: new { book.BookId }
