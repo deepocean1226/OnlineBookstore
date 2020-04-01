@@ -20,9 +20,18 @@ namespace OnlineBookstore.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly OnlineBookstoreDBContext Context;
 
+        [BindProperty]
+        public string bookname { get; set; }
+        [BindProperty]
+        public int id { get; set; }
+
         public IndexPageViewModel ViewModel { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger,OnlineBookstoreDBContext _context,IUserService userService,ILoginedService loginedService,IBookService bookService)
+        public IndexModel(ILogger<IndexModel> logger,
+            OnlineBookstoreDBContext _context,
+            IUserService userService,
+            ILoginedService loginedService,
+            IBookService bookService)
         {
             ViewModel = new IndexPageViewModel();
             Context = _context;
@@ -43,6 +52,17 @@ namespace OnlineBookstore.Pages
             ViewModel.Categories = Context.Category.Select(x => x.CateName).ToList();
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (bookname == null)
+            {
+                return Page();
+            }
+            Models.Book book = _bookService.GetByBookName(bookname).Result;
+            return RedirectToPage("/Books/Details", new { id=book.BookId });
+            //, routeValues: new { book.BookId }
         }
     }
 }
