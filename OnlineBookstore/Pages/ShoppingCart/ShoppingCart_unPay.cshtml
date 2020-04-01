@@ -21,8 +21,8 @@
                     <li class="nav-item">
                         <a class="nav-link " asp-page="ShoppingCart">全部订单</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">待付款</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">待付款</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-page="ShoppingCart_Finished">已完成</a>
@@ -34,13 +34,13 @@
                 <table class="table table-hover" style="font-size: 20px">
                     <thead>
                         <tr class="text-center">
-                            <th scope="col">图片</th>
-                            <th scope="col">书名</th>
-                            <th scope="col">单价</th>
-                            <th scope="col">购买数量</th>
-                            <th scope="col">小计</th>
-                            <th scope="col">交易状态</th>
-                            <th scope="col">操作</th>
+                            <th scope="col" class="text-center">图片</th>
+                            <th scope="col" class="text-center">书名</th>
+                            <th scope="col" class="text-center">单价</th>
+                            <th scope="col" class="text-center">购买数量</th>
+                            <th scope="col" class="text-center">小计</th>
+                            <th scope="col" class="text-center">交易状态</th>
+                            <th scope="col" class="text-center">操作</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,7 +70,7 @@
                                     <td class="align-middle text-center">
                                         <div class="btn-group btn-group-sm">
                                             <form method="post">
-                                                <button class="btn btn-outline-danger" type="submit" asp-page-handler="del" asp-route-purchase='@a.DetailNo'>删除</button>
+                                                <button class="btn btn-danger" type="submit" asp-page-handler="del" asp-route-purchase='@a.DetailNo'>删除</button>
                                             </form>
                                         </div>
                                     </td>
@@ -85,7 +85,7 @@
                 <span style="font-size:20px">共计: @Model.sum 元</span>
                 <br />
                 <form method="post">
-                    <button class="btn btn-outline-success" type="submit" asp-page-handler="check">去付款</button>
+                    <button class="btn btn-success" type="submit" asp-page-handler="check">去付款</button>
                 </form>
             </div>
         </div>
