@@ -24,12 +24,10 @@
                 @foreach (var category in @Model.ViewModel.Categories)
                 {
                     <li>
-                        <h1>
-                            <a class="menu-left-link-flex-container" href="/Category/@Html.DisplayFor(model => category)">
-                                <span class="menu-left-link-flex-text">@Html.DisplayTextFor(model => category)</span>
-                                <i class="glyphicon glyphicon-chevron-right glyph-menu-left"></i>
-                            </a>
-                        </h1>
+                        <h4>
+                            <i class="glyphicon glyphicon-chevron-right glyph-menu-left"></i>
+                            <a asp-page="./Books/CateDetails" asp-route-id="@Html.DisplayTextFor(model => category)"><p class="main-left-items-row">@Html.DisplayTextFor(model => category)</p></a>
+                        </h4>
                     </li>
                 }
 

@@ -1,0 +1,29 @@
+﻿@page "{id}"
+@model CateDetailsModel
+@{
+    ViewData["Title"] = "Category page";
+}
+<link rel="stylesheet" href="~/css/mainPage.css" />
+
+
+<div class="main-container">
+    <div class="main-top">
+    </div>
+    <div class="main-recommended-container">
+        <div class="main-recommended">
+            <div class="main-recommended-box-left">
+                <h3 class="box-title">@Model.ViewModel.Id</h3>
+                <div class="main-recommended-box-left-row">
+                    @foreach (var book in @Model.ViewModel.ResBooks)
+                    {
+                        <div class="recommended-book">
+                            <a asp-page="/Books/Details" asp-route-id="@Html.DisplayTextFor(model => book.BookId)"><img class="book-cover-recommended" src="~/images/BookCovers/@Html.DisplayFor(model => book.ImagePath)" /></a>
+                            <a asp-page="/Books/Details" asp-route-id="@Html.DisplayTextFor(model => book.BookId)"><p class="main-recommended-title">@Html.DisplayTextFor(model => book.BookName)</p></a>
+                            <p class="recommended-book-price">特价: @Html.DisplayTextFor(model => book.UnitPrice)￥</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
