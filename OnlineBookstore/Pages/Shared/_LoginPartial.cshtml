@@ -1,18 +1,23 @@
 @using OnlineBookstore.Models
 @using OnlineBookstore.Services
 @using Microsoft.AspNetCore.Identity
+@using System.Threading.Tasks;
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@*@model loginPartial*@
 
 @inject ILoginedService loginedService
 
 @if (loginedService.isLogined().Result)
 {
-    <form  method="post" id="logoutForm" class="navbar-right">
+    <form id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a  title="Manage">Hello @loginedService.GetUserName().Result</a>
+                <a title="Manage">Hello @loginedService.GetUserName().Result</a>
             </li>
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+                <a      asp-page="/Index"
+                        asp-page-handler="Logout"
+                        asp-route-username="@loginedService.GetUserName().Result">Logout</a>
             </li>
         </ul>
     </form>
@@ -24,3 +29,21 @@ else
         <li><a asp-page="/Login/Login">SignIn</a></li>
     </ul>
 }
+
+@*@functions{
+    public class loginPartial : PageModel
+    {
+        private readonly ILoginedService _loginedService;
+
+        public loginPartial(ILoginedService loginedService)
+        {
+            _loginedService = loginedService;
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            await _loginedService.ReMoveLogin(_loginedService.GetUserName().Result);
+            return RedirectToPage("/Index");
+        }
+    }
+}*@

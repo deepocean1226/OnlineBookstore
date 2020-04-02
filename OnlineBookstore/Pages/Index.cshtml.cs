@@ -64,5 +64,11 @@ namespace OnlineBookstore.Pages
             return RedirectToPage("/Books/Details", new { id=book.BookId });
             //, routeValues: new { book.BookId }
         }
+
+        public async Task<IActionResult> OnGetLogout(string username)
+        {
+            await _loginedService.ReMoveLogin(_loginedService.GetUserName().Result);
+            return RedirectToPage("/Index");
+        }
     }
 }
