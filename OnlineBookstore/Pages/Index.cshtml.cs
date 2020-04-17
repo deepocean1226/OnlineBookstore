@@ -40,16 +40,30 @@ namespace OnlineBookstore.Pages
             _loginedService = loginedService;
             _logger = logger;
 
-            ViewModel.RecommendedBooks = Context.Book.ToList();
+            if(Context.Book.ToList().Count>=4)
+                ViewModel.RecommendedBooks = Context.Book.ToList().Take(4).ToList();
+            else
+                ViewModel.RecommendedBooks = Context.Book.ToList();
             ViewModel.LimitedSaleBooks = Context.Book.ToList();
             ViewModel.Categories = Context.Category.Select(x => x.CateName).ToList();
+            ViewModel.NewBooks = new List<Book>();
+            ViewModel.NewBooks.Add(Context.Book.ToList().Last());
+            if(Context.Book.ToList().Count()>=2)
+                ViewModel.NewBooks.Add(Context.Book.ToList()[Context.Book.ToList().Count()-2]);
         }
 
         public IActionResult OnGetAsync()
         {
-            ViewModel.RecommendedBooks = Context.Book.ToList();
+            if (Context.Book.ToList().Count >= 4)
+                ViewModel.RecommendedBooks = Context.Book.ToList().Take(4).ToList();
+            else
+                ViewModel.RecommendedBooks = Context.Book.ToList();
             ViewModel.LimitedSaleBooks = Context.Book.ToList();
             ViewModel.Categories = Context.Category.Select(x => x.CateName).ToList();
+            ViewModel.NewBooks = new List<Book>();
+            ViewModel.NewBooks.Add(Context.Book.ToList().Last());
+            if (Context.Book.ToList().Count() >= 2)
+                ViewModel.NewBooks.Add(Context.Book.ToList()[Context.Book.ToList().Count() - 2]);
 
             return Page();
         }
