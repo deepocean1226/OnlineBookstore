@@ -20,8 +20,11 @@ namespace OnlineBookstore.Pages
         private readonly ILogger<IndexModel> _logger;
         private readonly OnlineBookstoreDBContext Context;
 
+        //获取的书名
         [BindProperty]
         public string bookname { get; set; }
+
+        //书目ID
         [BindProperty]
         public int id { get; set; }
 
@@ -40,6 +43,7 @@ namespace OnlineBookstore.Pages
             _loginedService = loginedService;
             _logger = logger;
 
+            //对ViewModel的初始化
             if(Context.Book.ToList().Count>=4)
                 ViewModel.RecommendedBooks = Context.Book.ToList().Take(4).ToList();
             else
@@ -51,9 +55,13 @@ namespace OnlineBookstore.Pages
             if(Context.Book.ToList().Count()>=2)
                 ViewModel.NewBooks.Add(Context.Book.ToList()[Context.Book.ToList().Count()-2]);
         }
-
+        /// <summary>
+        /// 页面调用后初始化
+        /// </summary>
+        /// <returns></returns>
         public IActionResult OnGetAsync()
         {
+            //对ViewModel的初始化
             if (Context.Book.ToList().Count >= 4)
                 ViewModel.RecommendedBooks = Context.Book.ToList().Take(4).ToList();
             else
@@ -68,6 +76,10 @@ namespace OnlineBookstore.Pages
             return Page();
         }
 
+        /// <summary>
+        /// 点击详情页响应
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync()
         {
             if (bookname == null)
@@ -79,6 +91,11 @@ namespace OnlineBookstore.Pages
             //, routeValues: new { book.BookId }
         }
 
+        /// <summary>
+        /// 退出登录响应
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnGetLogout(string username)
         {
             await _loginedService.ReMoveLogin(_loginedService.GetUserName().Result);

@@ -17,12 +17,21 @@ namespace OnlineBookstore.Services
         }
 
         public Task<List<Purchase>> GetAll() => Task.Run(function: () => _purchases);
-
+        /// <summary>
+        /// 根据订单获取所有种书目购物车信息
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
         public Task<List<Purchase>> GetById(int orderId)
         {
             return Task.Run(function: () => { return _purchases.FindAll(x => x.OrderNo == orderId); });
         }
-
+        /// <summary>
+        /// 对订单加书目购物车信息
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="purchase"></param>
+        /// <returns></returns>
         public Task<bool> Add(int order,Purchase purchase)
         {
             return Task.Run(function: () =>
@@ -34,7 +43,12 @@ namespace OnlineBookstore.Services
                  return true;
              });
         }
-
+        /// <summary>
+        /// 判断订单内是否有某种书目
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="bookid"></param>
+        /// <returns></returns>
         public Task<bool> FindByBookid(int order,int bookid)
         {
             return Task.Run(function: () =>
@@ -50,6 +64,13 @@ namespace OnlineBookstore.Services
             });
 
         }
+        /// <summary>
+        /// 增加购物车信息
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="bookid"></param>
+        /// <param name="num"></param>
+        /// <returns></returns>
         public Task AddBook(int order,int bookid,int num)
         {
             return Task.Run(function: () =>

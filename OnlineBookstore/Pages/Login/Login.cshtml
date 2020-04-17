@@ -4,40 +4,6 @@
     ViewData["Title"] = "登录";
     Layout = null;
 }
-
-@*<h1>@ViewData["Title"]</h1>
-    <p>这是我的登录页面</p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.userInfos[0].UserId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.userInfos[0].Pwd)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.userInfos[0].UserName)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.userInfos)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Pwd)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>*@
 <!doctype html>
 <html>
 <head>

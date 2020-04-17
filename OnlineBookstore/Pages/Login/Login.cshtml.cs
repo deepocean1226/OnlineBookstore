@@ -15,14 +15,15 @@ namespace OnlineBookstore
         private readonly ILoginedService _loginedService;
         public List<User> users = new List<User>();
 
-        
+        //获取输入的绑定变量
         [BindProperty]
         public User User { get; set; }
-
         [BindProperty]
         public bool Name { get; set; }
         [BindProperty]
         public bool Password { get; set; }
+
+        //判断密码是否正确
         [BindProperty]
         public bool Login_b { get; set; }
 
@@ -35,7 +36,10 @@ namespace OnlineBookstore
             this.Login_b = false;
         }
 
-        
+        /// <summary>
+        /// 登录响应
+        /// </summary>
+        /// <returns></returns>
         public async Task OnPostAsync()
         {
             users = await userService.GetAll();

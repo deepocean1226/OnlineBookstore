@@ -10,11 +10,6 @@
                 <h2>@Html.DisplayFor(model => model.ViewModel.Book.BookName)</h2>
                 <div>
                     作者:@Html.DisplayFor(model => model.ViewModel.Book.Author)
-                    @*  根据作者名搜索书籍
-                            @foreach (var author in Model.ViewModel.Book.BookAuthors)
-                        {
-                            <a asp-page="./Books/Details" asp-route-id="@author.AuthorId">@author.Author.FirstName @author.Author.LastName</a>
-                        }*@
                 </div>
                 <div>出版社: @Html.DisplayFor(model => model.ViewModel.Book.Publisher)</div>
                 <div>出版日期: @Html.DisplayFor(model => model.ViewModel.Book.PublishDate)</div>

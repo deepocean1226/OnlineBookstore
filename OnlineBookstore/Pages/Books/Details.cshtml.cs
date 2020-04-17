@@ -44,11 +44,8 @@ namespace OnlineBookstore
 
         [BindProperty]
         public DetailsPageViewModel ViewModel { get; set; }
-
         public string ReturnUrl { get; set; }
-
         public string AuthorString { get; set; }
-
         [BindProperty]
         public string Category { get; set; }
 

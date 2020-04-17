@@ -18,7 +18,10 @@ namespace OnlineBookstore.Services
             this._context = context;
             _users = _context.User.ToList();
         }
-
+        /// <summary>
+        /// 获取所有用户信息
+        /// </summary>
+        /// <returns></returns>
         public Task<List<User>> GetAll()
         {
             return Task.Run(function: () => _users);
@@ -32,7 +35,11 @@ namespace OnlineBookstore.Services
                 }
             );
         }
-
+        /// <summary>
+        /// 新增用户
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public Task<bool> Add(User user)
         {
             return Task.Run(function: () =>
@@ -49,7 +56,11 @@ namespace OnlineBookstore.Services
 
             });
         }
-
+        /// <summary>
+        /// 根据用户名获取ID
+        /// </summary>
+        /// <param name="Username"></param>
+        /// <returns></returns>
         public Task<int> GetId(string Username)
         {
             return Task.Run(function: () =>
