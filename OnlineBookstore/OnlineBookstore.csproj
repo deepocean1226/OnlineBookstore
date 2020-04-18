@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\BookCovers\时生 %281%29.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Pages\Error.cshtml" />
     <None Include="Pages\Index.cshtml" />
     <None Include="Pages\Shared\_ValidationScriptsPartial.cshtml" />

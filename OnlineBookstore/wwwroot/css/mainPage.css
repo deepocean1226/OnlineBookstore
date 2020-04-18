@@ -129,12 +129,12 @@ body > div > div.main-container > div.main-top > div.menu-left > ul > li:nth-chi
 .main-recommended-box-left {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px 0px;
     display: flex;
-    flex-direction: column;
+    flex-direction:column;
     background-color: white;
     border: 1px solid #eee;
     margin: 15px 15px 15px 0px;
     height: auto;
-    width: 800px;
+    width: auto;
     border-radius: 5px;
 }
 
